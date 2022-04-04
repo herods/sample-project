@@ -15,4 +15,4 @@ This is a sample Java 11 project with 3-layered architecture. The code is separa
 3. In terminal, go to a folder that contains the source code
 4. Run `mvn clean package` to package the app into a jar
 5. Run `java -jar target/project-1.0-SNAPSHOT.jar`
-6. At this point the app will fail since no "jdbc_url" is specified
+6. At this point, the app fails since no "jdbc_url" is specified
