@@ -1,13 +1,14 @@
 package controllers;
 
-import services.SampleService;
+import services.UserService;
+import utils.ConsoleUtils;
 
 /*
     Layer #1: Data Presentation
 */
-public class SampleController {
+public class UserController {
 
-    private SampleService sampleService;
+    private UserService userService;
     /*
       Dependency injection pattern, see:
       https://www.vogella.com/tutorials/DependencyInjection/article.html#:~:text=Dependency%20injection%20(DI)%20is%20the,an%20instance%20of%20this%20class
@@ -15,14 +16,19 @@ public class SampleController {
       In this case, "SampleService" is being injected into "SampleController" as a dependency, and "SampleController"
       manages state of the "SampleService".
     */
-    public SampleController(SampleService sampleService) {
-        this.sampleService = sampleService;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     public void displayUsersWithLongUsernames() {
         // 1. Get users with long usernames
-        String someDataFromDatabase = sampleService.getUsersWithLongUsername();
+        String someDataFromDatabase = userService.getUsersWithLongUsername();
         // 2. Display the list of users in console
-        System.out.println("Displaying data from database: " + someDataFromDatabase);
+        ConsoleUtils.writeConsoleLine("Displaying data from database: " + someDataFromDatabase);
+
+        // 3. Ask User for console input
+        ConsoleUtils.writeConsoleLine("Write your name:");
+        final String name = ConsoleUtils.readConsoleLine();
+        ConsoleUtils.writeConsoleLine("Your name is:" + name);
     }
 }

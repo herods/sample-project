@@ -1,25 +1,29 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class User {
-    public String userId;
-    public String username;
-    public String password;
+    private Long userId;
+    private String username;
+    private String password;
+    private List<Project> projects;
 
     // Constructor
-    public User(String userId, String username, String password) {
+    public User(Long userId, String username, String password) {
         this.userId = userId;
         this.username = username;
         this.password = password;
+        this.projects = new ArrayList<>();
     }
 
     // Getters and Setters
-    public String getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
@@ -39,6 +43,14 @@ public class User {
         this.password = password;
     }
 
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
+    }
+
     // Overriding Equals() and hashcode() in order for the model to be "compatible" with "Hash Collections", e.g.
     // HashMap, HashSet.
     @Override
@@ -46,16 +58,21 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return getUserId().equals(user.getUserId()) && getUsername().equals(user.getUsername()) && getPassword().equals(user.getPassword());
+        return Objects.equals(userId, user.userId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUserId(), getUsername(), getPassword());
+        return Objects.hash(userId);
     }
 
     @Override
     public String toString() {
-        return "{ userId: " + this.userId + ", username: " + this.username + ", password: " + this.password + " }";
+        return "User{" +
+                "userId=" + userId +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", projects=" + projects +
+                '}';
     }
 }
